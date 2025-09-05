@@ -12,11 +12,16 @@ import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.StairsBlock;
+import net.minecraft.block.enums.BlockHalf;
+import net.minecraft.block.enums.StairShape;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.model.json.ModelVariant;
 import net.minecraft.client.render.model.json.WeightedVariant;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
+import net.minecraft.data.client.ModelIds;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.Pool;
 
@@ -42,6 +47,7 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         this.registerFamily(blockStateModelGenerator, LEMON_BLOCK_FAMILY);
+        generateUvLockedStairs(blockStateModelGenerator, ModBlocks.LEMON_STAIRS);
 
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.TOMATO, BlockStateModelGenerator.CrossType.NOT_TINTED, TomatoCrop.AGE, 0, 1, 2, 3, 4, 5, 6, 7);
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.CABBAGE, BlockStateModelGenerator.CrossType.NOT_TINTED, TomatoCrop.AGE, 0, 1, 2, 3, 4, 5, 6, 7);
@@ -226,6 +232,64 @@ public class ModModelProvider extends FabricModelProvider {
     private void generateSapling(BlockStateModelGenerator generator, Block block, BlockStateModelGenerator.CrossType crossType) {
         generator.registerItemModel(block.asItem(), crossType.registerItemModel(generator, block));
         generator.registerTintableCrossBlockState(block, crossType);
+    }
+
+    private void generateUvLockedStairs(BlockStateModelGenerator generator, Block stairs) {
+        Identifier straight = ModelIds.getBlockModelId(stairs);
+        Identifier inner = ModelIds.getBlockSubModelId(stairs, "_inner");
+        Identifier outer = ModelIds.getBlockSubModelId(stairs, "_outer");
+
+        VariantsBlockStateSupplier supplier = VariantsBlockStateSupplier.create(stairs);
+        BlockStateVariantMap map = BlockStateVariantMap.create(StairsBlock.HALF, StairsBlock.FACING, StairsBlock.SHAPE);
+
+        Direction[] directions = new Direction[]{Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.NORTH};
+
+        for (BlockHalf half : BlockHalf.values()) {
+            for (Direction facing : directions) {
+                int base = switch (facing) {
+                    case EAST -> 0;
+                    case SOUTH -> 90;
+                    case WEST -> 180;
+                    case NORTH -> 270;
+                    default -> 0;
+                };
+                for (StairShape shape : StairShape.values()) {
+                    Identifier model = switch (shape) {
+                        case STRAIGHT -> straight;
+                        case INNER_LEFT, INNER_RIGHT -> inner;
+                        case OUTER_LEFT, OUTER_RIGHT -> outer;
+                    };
+                    int x = half == BlockHalf.TOP ? 180 : 0;
+                    int y = base;
+                    if (half == BlockHalf.BOTTOM && (shape == StairShape.INNER_LEFT || shape == StairShape.OUTER_LEFT)) {
+                        y = (base + 270) % 360;
+                    } else if (half == BlockHalf.TOP && (shape == StairShape.INNER_RIGHT || shape == StairShape.OUTER_RIGHT)) {
+                        y = (base + 90) % 360;
+                    }
+
+                    BlockStateVariant variant = BlockStateVariant.create().put(VariantSettings.MODEL, model).uvlock();
+                    if (x != 0) {
+                        variant.put(VariantSettings.X, rotation(x));
+                    }
+                    if (y != 0) {
+                        variant.put(VariantSettings.Y, rotation(y));
+                    }
+                    map.register(half, facing, shape, variant);
+                }
+            }
+        }
+
+        generator.blockStateCollector.accept(supplier.coordinate(map));
+    }
+
+    private VariantSettings.Rotation rotation(int degrees) {
+        return switch (degrees) {
+            case 0 -> VariantSettings.Rotation.R0;
+            case 90 -> VariantSettings.Rotation.R90;
+            case 180 -> VariantSettings.Rotation.R180;
+            case 270 -> VariantSettings.Rotation.R270;
+            default -> throw new IllegalArgumentException("Invalid rotation: " + degrees);
+        };
     }
 
     private void registerFamily(BlockStateModelGenerator generator, BlockFamily family) {
