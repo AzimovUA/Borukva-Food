@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "borukva-food:chilli_pepper"
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "borukva-food:hot_spice"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
+}

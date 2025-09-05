@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 40,
+  "experience": 0.35,
+  "ingredient": "borukva-food:corn_seeds",
+  "result": {
+    "id": "borukva-food:popcorn"
+  }
+}

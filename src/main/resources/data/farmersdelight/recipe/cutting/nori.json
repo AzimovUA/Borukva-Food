@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "minecraft:dried_kelp"
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "borukva-food:nori"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
+}

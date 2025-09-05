@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cooking",
+  "category": "meals",
+  "experience": 1.0,
+  "container": {
+    "count": 1,
+    "id": "minecraft:bowl"
+  },
+  "ingredients": [
+    "minecraft:carrot",
+    "minecraft:chicken",
+    "farmersdelight:onion",
+    "borukva-food:oil",
+    "borukva-food:salt"
+  ],
+  "result": {
+    "count": 1,
+    "id": "borukva-food:broth"
+  }
+}

@@ -41,7 +41,7 @@ public class LemonFruitLeaves extends TintedParticleLeavesBlock implements Polym
         this.modelWaterlogged_true = PolymerBlockResourceUtils.requestBlock(BlockModelType.TRANSPARENT_BLOCK_WATERLOGGED, PolymerBlockModel.of(Identifier.of(BorukvaFood.MOD_ID, "block/lemon_fruit_leaves_has_fruit")));
         this.model_false = PolymerBlockResourceUtils.requestBlock(BlockModelType.TRANSPARENT_BLOCK, PolymerBlockModel.of(Identifier.of(BorukvaFood.MOD_ID, "block/lemon_fruit_leaves")));
         this.modelWaterlogged_false = PolymerBlockResourceUtils.requestBlock(BlockModelType.TRANSPARENT_BLOCK_WATERLOGGED, PolymerBlockModel.of(Identifier.of(BorukvaFood.MOD_ID, "block/lemon_fruit_leaves")));
-        this.setDefaultState(this.stateManager.getDefaultState().with(HAS_FRUIT, true).with(Properties.PERSISTENT, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(HAS_FRUIT, true).with(Properties.PERSISTENT, true));
     }
 
     @Override

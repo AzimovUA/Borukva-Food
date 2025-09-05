@@ -1,5 +1,6 @@
 package com.opryshok.datagen;
 
+import com.google.common.collect.ImmutableMap;
 import com.opryshok.BorukvaFood;
 import com.opryshok.block.ModBlocks;
 import com.opryshok.block.bushes.BlackcurrantsBush;
@@ -14,16 +15,34 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.model.json.ModelVariant;
 import net.minecraft.client.render.model.json.WeightedVariant;
+import net.minecraft.data.family.BlockFamilies;
+import net.minecraft.data.family.BlockFamily;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.Pool;
+
+import java.util.Map;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
         super(output);
     }
+    private final Map<Block, TexturedModel> uniqueModels = ImmutableMap.<Block, TexturedModel>builder()
+            .build();
+
+    public static BlockFamily LEMON_BLOCK_FAMILY = BlockFamilies.register(ModBlocks.LEMON_PLANKS)
+            .button(ModBlocks.LEMON_BUTTON)
+            .fence(ModBlocks.LEMON_FENCE)
+            .fenceGate(ModBlocks.LEMON_FENCE_GATE)
+            .pressurePlate(ModBlocks.LEMON_PRESSURE_PLATE)
+            .slab(ModBlocks.LEMON_SLAB)
+            .stairs(ModBlocks.LEMON_STAIRS)
+            .trapdoor(ModBlocks.LEMON_TRAPDOOR)
+            .build();
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        this.registerFamily(blockStateModelGenerator, LEMON_BLOCK_FAMILY);
+
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.TOMATO, BlockStateModelGenerator.CrossType.NOT_TINTED, TomatoCrop.AGE, 0, 1, 2, 3, 4, 5, 6, 7);
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.CABBAGE, BlockStateModelGenerator.CrossType.NOT_TINTED, TomatoCrop.AGE, 0, 1, 2, 3, 4, 5, 6, 7);
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(ModBlocks.CORN, BlockStateModelGenerator.CrossType.NOT_TINTED, TomatoCrop.AGE, 0, 1, 2, 3, 4, 5, 6, 7);
@@ -54,21 +73,12 @@ public class ModModelProvider extends FabricModelProvider {
         generateSapling(blockStateModelGenerator, ModBlocks.LEMON_SAPLING, BlockStateModelGenerator.CrossType.NOT_TINTED);
         blockStateModelGenerator.createLogTexturePool(ModBlocks.STRIPPED_LEMON_LOG).log(ModBlocks.STRIPPED_LEMON_LOG).wood(ModBlocks.STRIPPED_LEMON_WOOD);
 
-        BlockStateModelGenerator.BlockTexturePool lemonPlanksPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.LEMON_PLANKS);
-        lemonPlanksPool.slab(ModBlocks.LEMON_SLAB);
-        lemonPlanksPool.stairs(ModBlocks.LEMON_STAIRS);
-        lemonPlanksPool.fenceGate(ModBlocks.LEMON_FENCE_GATE);
-        lemonPlanksPool.button(ModBlocks.LEMON_BUTTON);
-        lemonPlanksPool.pressurePlate(ModBlocks.LEMON_PRESSURE_PLATE);
-        lemonPlanksPool.fence(ModBlocks.LEMON_FENCE);
-        blockStateModelGenerator.registerTrapdoor(ModBlocks.LEMON_TRAPDOOR);
-
         blockStateModelGenerator.createLogTexturePool(ModBlocks.AVOCADO_LOG).log(ModBlocks.AVOCADO_LOG).wood(ModBlocks.AVOCADO_WOOD);
         blockStateModelGenerator.createLogTexturePool(ModBlocks.STRIPPED_AVOCADO_LOG).log(ModBlocks.STRIPPED_AVOCADO_LOG).wood(ModBlocks.STRIPPED_AVOCADO_WOOD);
         blockStateModelGenerator.createLogTexturePool(ModBlocks.NETHER_HAY).log(ModBlocks.NETHER_HAY);
+
         BlockStateModelGenerator.BlockTexturePool avocadoPlanksPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.AVOCADO_PLANKS);
         avocadoPlanksPool.slab(ModBlocks.AVOCADO_SLAB);
-        avocadoPlanksPool.stairs(ModBlocks.AVOCADO_STAIRS);
         avocadoPlanksPool.fenceGate(ModBlocks.AVOCADO_FENCE_GATE);
         avocadoPlanksPool.button(ModBlocks.AVOCADO_BUTTON);
         avocadoPlanksPool.pressurePlate(ModBlocks.AVOCADO_PRESSURE_PLATE);
@@ -216,5 +226,10 @@ public class ModModelProvider extends FabricModelProvider {
     private void generateSapling(BlockStateModelGenerator generator, Block block, BlockStateModelGenerator.CrossType crossType) {
         generator.registerItemModel(block.asItem(), crossType.registerItemModel(generator, block));
         generator.registerTintableCrossBlockState(block, crossType);
+    }
+
+    private void registerFamily(BlockStateModelGenerator generator, BlockFamily family) {
+        TexturedModel texturedModel = this.uniqueModels.getOrDefault(family.getBaseBlock(), TexturedModel.CUBE_ALL.get(family.getBaseBlock()));
+        generator.new BlockTexturePool(texturedModel.getTextures()).base(family.getBaseBlock(), texturedModel.getModel()).family(family);
     }
 }

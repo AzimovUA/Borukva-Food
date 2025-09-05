@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "farmersdelight:tomato",
+    "borukva-food:salt",
+    "minecraft:sugar"
+  ],
+  "result": {
+    "count": 1,
+    "id": "borukva-food:ketchup"
+  }
+}

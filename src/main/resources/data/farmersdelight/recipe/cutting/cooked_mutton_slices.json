@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "farmersdelight:cooked_mutton_chops"
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "borukva-food:cooked_mutton_slices"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
+}

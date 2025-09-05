@@ -1,0 +1,12 @@
+{
+  "type": "farmersdelight:cooking",
+  "category": "meals",
+  "experience": 1.0,
+  "ingredients": [
+    "borukva-food:corn"
+  ],
+  "result": {
+    "count": 1,
+    "id": "borukva-food:boiled_corn"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "borukva-food:nether_bun"
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "borukva-food:nether_bun_slice"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
+}

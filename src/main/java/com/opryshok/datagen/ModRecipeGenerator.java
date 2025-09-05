@@ -82,7 +82,6 @@ public class ModRecipeGenerator extends RecipeGenerator {
             .criterion(hasItem(Items.BRICK), conditionsFromItem(Items.BRICK))
             .offerTo(exporter);
 
-
         createShapeless(RecipeCategory.MISC, ModBlocks.CUTTING_BOARD_ITEM, 1)
             .input(Ingredient.ofTag(itemLookup.getOrThrow(TagKey.of(RegistryKeys.ITEM, Identifier.of("minecraft", "wooden_slabs")))))
             .criterion("has_slabs", conditionsFromTag(TagKey.of(RegistryKeys.ITEM, Identifier.of("minecraft", "wooden_slabs"))))
@@ -586,6 +585,7 @@ public class ModRecipeGenerator extends RecipeGenerator {
             .input(ModItems.NETHER_WHEAT, 2)
             .criterion(hasItem(ModItems.NETHER_WHEAT), conditionsFromItem(ModItems.NETHER_WHEAT_SEEDS))
             .offerTo(exporter);
+
         offerSlabRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AVOCADO_SLAB_ITEM, ModBlocks.AVOCADO_PLANKS_ITEM);
         offerSlabRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LEMON_SLAB_ITEM, ModBlocks.LEMON_PLANKS_ITEM);
         offerPressurePlateRecipe(ModBlocks.LEMON_PRESSURE_PLATE_ITEM, ModBlocks.LEMON_PLANKS_ITEM);
@@ -671,6 +671,7 @@ public class ModRecipeGenerator extends RecipeGenerator {
             .offerTo(exporter);
         seedsRecipe(ModItems.ENDER_INFECTED_ONION, ModItems.ENDER_INFECTED_ONION_SEEDS, exporter);
     }
+
     private void offerDoorRecipe(RecipeExporter exporter, Item output, Item input) {
         createDoorRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter);
     }

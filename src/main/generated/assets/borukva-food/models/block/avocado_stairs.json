@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "borukva-food:block/avocado_planks",
-    "side": "borukva-food:block/avocado_planks",
-    "top": "borukva-food:block/avocado_planks"
-  }
-}

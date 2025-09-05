@@ -1,0 +1,18 @@
+{
+  "type": "farmersdelight:cooking",
+  "category": "meals",
+  "experience": 1.0,
+  "container": {
+    "count": 1,
+    "id": "minecraft:bowl"
+  },
+  "ingredients": [
+    "minecraft:crimson_fungus",
+    "minecraft:crimson_fungus",
+    "minecraft:warped_fungus"
+  ],
+  "result": {
+    "count": 1,
+    "id": "borukva-food:fungus_stew"
+  }
+}

@@ -54,8 +54,8 @@ public class PolyTrapdoorBlock extends TrapdoorBlock implements PolymerTexturedB
             OPEN_TRAPDOORS_BOTTOM.put(dir, requestBlock(modelType, getModel("open", 0, y_rotation)));
             OPEN_TRAPDOORS_BOTTOM_WATERLOGGED.put(dir, requestBlock(modelTypeWaterlogged, getModel("open", 0, y_rotation)));
 
-            OPEN_TRAPDOORS_TOP.put(dir, requestBlock(modelType, getModel("open", 180, y_rotation)));
-            OPEN_TRAPDOORS_TOP_WATERLOGGED.put(dir, requestBlock(modelTypeWaterlogged, getModel("open", 180, y_rotation)));
+            OPEN_TRAPDOORS_TOP.put(dir, requestBlock(modelType, getModel("open", 0, y_rotation)));
+            OPEN_TRAPDOORS_TOP_WATERLOGGED.put(dir, requestBlock(modelTypeWaterlogged, getModel("open", 0, y_rotation)));
         }
 
         for (int i = 0; i < 4; i++) {

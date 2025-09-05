@@ -169,7 +169,6 @@ public class ModItems {
                 entries.add(RICE);
                 entries.add(RICE_PANICLE);
                 entries.add(RICE_BOWL);
-                entries.add(TOMATO_SLICES);
                 entries.add(ONION_SEEDS);
                 entries.add(TOMATO_SANDWICH);
                 entries.add(SWEET_BERRY_COOKIE);
@@ -180,7 +179,15 @@ public class ModItems {
                 entries.add(SALMON_FILLET);
                 entries.add(SALMON_MAKI);
                 entries.add(SALMON_NIGIRI);
+                entries.add(CHICKEN_LEG);
+                entries.add(COOKED_CHICKEN_LEG);
             }
+            entries.add(MUTTON_SLICES);
+            entries.add(COOKED_MUTTON_SLICES);
+            entries.add(BEEF_SLICES);
+            entries.add(COOKED_BEEF_SLICES);
+
+            entries.add(TOMATO_SLICES);
             entries.add(CHILLI_PEPPER);
             entries.add(CORN);
             entries.add(CUCUMBER);
@@ -224,8 +231,6 @@ public class ModItems {
             entries.add(FUNGUS_STEW);
             entries.add(BLACKCURRANTS);
             entries.add(GOOSEBERRY);
-            entries.add(BEEF_SLICES);
-            entries.add(COOKED_BEEF_SLICES);
             entries.add(BEEF_BARBECUE);
             entries.add(COOKED_BEEF_BARBECUE);
             entries.add(VEGAN_BARBECUE);
@@ -260,10 +265,6 @@ public class ModItems {
             entries.add(BOILED_CORN);
             entries.add(HOGLIN_MEAT);
             entries.add(COOKED_HOGLIN_MEAT);
-            entries.add(CHICKEN_LEG);
-            entries.add(COOKED_CHICKEN_LEG);
-            entries.add(MUTTON_SLICES);
-            entries.add(COOKED_MUTTON_SLICES);
             entries.add(CHORUS_FRUIT_IN_CHOCOLATE_ON_A_STICK);
             entries.add(CHORUS_FRUITS_WITH_ENDER_JAM);
             entries.add(ENDER_JAM);

@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "farmersdelight:minced_beef"
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "borukva-food:beef_slices"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
+}

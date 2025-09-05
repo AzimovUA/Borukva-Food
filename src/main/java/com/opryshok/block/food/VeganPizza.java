@@ -1,7 +1,9 @@
 package com.opryshok.block.food;
 
 import com.opryshok.BorukvaFood;
+import com.opryshok.item.KnifeTool;
 import com.opryshok.item.ModItems;
+import com.opryshok.utils.BorukvaFoodUtil;
 import com.opryshok.utils.ModProperties;
 import com.opryshok.utils.TransparentBlocks.TransparentFlatTripWire;
 import eu.pb4.factorytools.api.block.FactoryBlock;
@@ -11,15 +13,23 @@ import eu.pb4.polymer.virtualentity.api.ElementHolder;
 import eu.pb4.polymer.virtualentity.api.attachment.BlockBoundAttachment;
 import eu.pb4.polymer.virtualentity.api.attachment.HolderAttachment;
 import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
@@ -44,6 +54,42 @@ public class VeganPizza extends Block implements TransparentFlatTripWire, Factor
     }
 
     @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        ItemStack stack = player.getMainHandStack();
+        boolean canCut = false;
+
+        if (stack.getItem() instanceof KnifeTool) {
+            canCut = true;
+        }
+
+        if (!canCut && FabricLoader.getInstance().isModLoaded("farmersdelight")) {
+            TagKey<Item> fdKnives = TagKey.of(net.minecraft.registry.RegistryKeys.ITEM,
+                    Identifier.of("farmersdelight", "tools/knives"));
+            if (stack.isIn(fdKnives)) canCut = true;
+        }
+
+        if (canCut) {
+            int i = state.get(ModProperties.SLICES);
+
+            ItemScatterer.spawn(world, player.getX(), player.getY(), player.getZ(),
+                    new ItemStack(this.getSlice(), 1));
+
+            if (i == 7) {
+                BorukvaFoodUtil.ledgerMixinInvoke();
+                world.removeBlock(pos, false);
+                world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos);
+            } else {
+                world.setBlockState(pos, state.with(ModProperties.SLICES, i + 1), 3);
+                BorukvaFoodUtil.ledgerMixinInvoke();
+            }
+
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    @Override
     protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         return world.getBlockState(pos.down()).isSolidBlock(world, pos.down());
     }
@@ -61,9 +107,7 @@ public class VeganPizza extends Block implements TransparentFlatTripWire, Factor
                         .withSuffixedPath("_slice" + i)));
             }
         }
-
         protected ItemDisplayElement pizza;
-
         protected Model(BlockState state) {
             init(state);
         }

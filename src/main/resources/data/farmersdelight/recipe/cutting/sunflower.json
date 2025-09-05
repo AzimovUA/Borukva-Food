@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "minecraft:sunflower"
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 4,
+        "id": "borukva-food:sunflower_seed"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
+}

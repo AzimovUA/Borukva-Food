@@ -66,7 +66,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(AVOCADO_PLANKS_ITEM)
                 .add(LEMON_PLANKS_ITEM);
 
-        valueLookupBuilder(ItemTags.STAIRS)
+        valueLookupBuilder(ItemTags.WOODEN_STAIRS)
                 .add(AVOCADO_STAIRS_ITEM)
                 .add(LEMON_STAIRS_ITEM);
 

@@ -39,7 +39,6 @@ import java.util.function.Function;
 import static com.opryshok.BorukvaFood.id;
 
 public class ModBlocks {
-    // Blocks:
     public static final Block TOMATO = registerBlock("tomato_crop", TomatoCrop::new, Block.Settings.copy(Blocks.WHEAT));
     public static final Block CABBAGE = registerBlock("cabbage_crop", CabbageCrop::new, Block.Settings.copy(Blocks.WHEAT));
     public static final Block CORN = registerBlock("corn_crop", CornCrop::new, Block.Settings.copy(Blocks.WHEAT));
@@ -209,15 +208,11 @@ public class ModBlocks {
                 entries.add(RICE_CRATE_ITEM);
                 entries.add(POTATO_CRATE_ITEM);
                 entries.add(BEETROOT_CRATE_ITEM);
-                entries.add(CABBAGE_CRATE_ITEM);
-                entries.add(CABBAGE_CRATE_ITEM);
-                entries.add(CABBAGE_CRATE_ITEM);
-                entries.add(CABBAGE_CRATE_ITEM);
-                entries.add(CABBAGE_CRATE_ITEM);
-                entries.add(CABBAGE_CRATE_ITEM);
                 entries.add(STOVE_ITEM);
                 entries.add(PAN_ITEM);
                 entries.add(POT_ITEM);
+                entries.add(ModItems.KNIFE);
+                entries.add(CUTTING_BOARD_ITEM);
             }
 
             entries.add(CHILLI_CRATE_ITEM);
@@ -226,8 +221,6 @@ public class ModBlocks {
             entries.add(LETTUCE_CRATE_ITEM);
             entries.add(CHORUS_CRATE_ITEM);
             entries.add(NETHER_HAY);
-            entries.add(CUTTING_BOARD_ITEM);
-            entries.add(ModItems.KNIFE);
             entries.add(ModItems.HARVEST_SICKLE);
             entries.add(ModItems.SOIL_ANALIZATOR);
             entries.add(ModItems.COMPOST);

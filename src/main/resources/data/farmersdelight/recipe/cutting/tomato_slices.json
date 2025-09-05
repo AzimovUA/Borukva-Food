@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    "farmersdelight:tomato"
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 3,
+        "id": "borukva-food:tomato_slices"
+      }
+    }
+  ],
+  "tool": "#c:tools/knife"
+}
