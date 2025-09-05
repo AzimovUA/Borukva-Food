@@ -11,7 +11,6 @@ import com.opryshok.item.ModItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.model.json.ModelVariant;
 import net.minecraft.client.render.model.json.WeightedVariant;
@@ -35,7 +34,6 @@ public class ModModelProvider extends FabricModelProvider {
             .fenceGate(ModBlocks.LEMON_FENCE_GATE)
             .pressurePlate(ModBlocks.LEMON_PRESSURE_PLATE)
             .slab(ModBlocks.LEMON_SLAB)
-            .stairs(ModBlocks.LEMON_STAIRS)
             .trapdoor(ModBlocks.LEMON_TRAPDOOR)
             .build();
 
