@@ -70,17 +70,19 @@ public class PolyStairsBlock extends StairsBlock implements FactoryBlock {
         }
 
         private void updateStatePos(BlockState state) {
+            float facingYaw = state.get(FACING).getPositiveHorizontalDegrees();
             if (state.get(HALF) == BlockHalf.BOTTOM) {
-                main.setYaw(state.get(FACING).getPositiveHorizontalDegrees() + switch (state.get(StairsBlock.SHAPE)) {
+                main.setLeftRotation(RotationAxis.POSITIVE_Y.rotationDegrees(facingYaw));
+                main.setYaw(switch (state.get(StairsBlock.SHAPE)) {
                     case STRAIGHT -> -90;
-                    case INNER_RIGHT, OUTER_RIGHT -> +270;
-                    default -> +180;
+                    case INNER_RIGHT, OUTER_RIGHT -> 270;
+                    default -> 180;
                 });
-            }
-            else {
-                main.setYaw(state.get(FACING).getPositiveHorizontalDegrees() + switch (state.get(StairsBlock.SHAPE)) {
-                    case STRAIGHT, INNER_LEFT, OUTER_LEFT -> + 90;
-                    default -> - 180;
+            } else {
+                main.setLeftRotation(RotationAxis.POSITIVE_Y.rotationDegrees(facingYaw));
+                main.setYaw(switch (state.get(StairsBlock.SHAPE)) {
+                    case STRAIGHT, INNER_LEFT, OUTER_LEFT -> 90;
+                    default -> -180;
                 });
                 main.setRightRotation(RotationAxis.POSITIVE_Z.rotationDegrees(180));
             }
